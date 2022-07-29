@@ -3,7 +3,7 @@ const express = require('express'),
 
 const verifyToken = require('./verifyToken');
 
-const { GetUser } = require('../controllers/users');
+const { GetUser } = require('../controllers/userController');
 
 router.get('/', verifyToken, GetUser);
 

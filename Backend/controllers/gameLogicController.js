@@ -3,7 +3,7 @@ const User = require('../model/user');
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-const ChangeBonuses = async (req, res) => {
+/*const ChangeBonuses = async (req, res) => {
 	const { bonus } = req.body;
 	const token = req.token;
 
@@ -59,4 +59,4 @@ const ChangeSkinId = async (req, res) => {
 	}
 };
 
-module.exports = { ChangeBonuses, ChangeSkinId };
+module.exports = { ChangeBonuses, ChangeSkinId };*/

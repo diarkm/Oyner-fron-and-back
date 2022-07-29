@@ -3,7 +3,11 @@ const express = require('express'),
 
 const verifyToken = require('./verifyToken');
 
-const { ChangePassword, Login, Register } = require('../controllers/auth');
+const {
+	ChangePassword,
+	Login,
+	Register,
+} = require('../controllers/authController');
 
 router.post('/change-password', verifyToken, ChangePassword);
 router.post('/login', Login);

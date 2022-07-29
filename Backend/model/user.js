@@ -8,15 +8,14 @@ const UserSchema = new mongoose.Schema(
 		firstName: { type: String, required: true },
 		lastName: { type: String, required: true },
 		password: { type: String, required: true },
-		bonuses: { type: Number, default: 0 },
-		skinId: { type: Number, default: 1 },
+		classroom: { type: mongoose.Types.ObjectId, ref: 'Classroom' },
 	},
 	{ collection: 'users' }
 );
 
 UserSchema.plugin(mongoosePaginate);
 
-const model = mongoose.model('UserSchema', UserSchema);
+const model = mongoose.model('User', UserSchema);
 
 model.paginate().then({});
 

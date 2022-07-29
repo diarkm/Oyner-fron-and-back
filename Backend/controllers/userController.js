@@ -57,8 +57,6 @@ const GetUser = async (req, res) => {
 			firstName: user.firstName,
 			lastName: user.lastName,
 			email: user.email,
-			bonuses: user.bonuses,
-			skinId: user.skinId,
 		};
 		res.json({ status: 'ok', data: data });
 	} catch (error) {

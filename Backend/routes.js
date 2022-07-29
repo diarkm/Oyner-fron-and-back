@@ -3,10 +3,10 @@ const express = require('express'),
 
 const authRoutes = require('./routes/authRoutes');
 const usersRoutes = require('./routes/usersRoutes');
-const bonusRoutes = require('./routes/gameRoutes');
+const gameRoutes = require('./routes/gameRoutes');
 
 router.use('/auth', authRoutes);
 router.use('/users', usersRoutes);
-router.use('/game', bonusRoutes);
+router.use('/game', gameRoutes);
 
 module.exports = router;
