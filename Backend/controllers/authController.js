@@ -49,7 +49,7 @@ const ChangePassword = async (req, res) => {
 
 const Login = async (req, res) => {
 	const { username, password } = req.body;
-	const user = await User.findOne({ username }).lean();
+	const user = await User.findOne({ username }).select('+password').lean();
 
 	if (!user) {
 		return res.json({ status: 'error', error: 'Invalid username or password' });
