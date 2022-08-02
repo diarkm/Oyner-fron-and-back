@@ -7,7 +7,7 @@ const StudentSchema = new mongoose.Schema(
 		password: { type: String, required: true, select: false },
 		classroom: { type: mongoose.Types.ObjectId, ref: 'Classroom' },
 	},
-	{ collection: 'students' }
+	{ collection: 'students', timestamps: true }
 );
 
 StudentSchema.plugin(mongoosePaginate);

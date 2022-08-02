@@ -14,13 +14,13 @@ const {
 	EditQuiz,
 	GetQuiz,
 	GetAllQuiz,
+	StartQuiz,
 } = require('../controllers/quizController');
 
 const {
 	AddQuestion,
 	EditQuestion,
 	GetQuestion,
-	GetAllQuizQuestions,
 } = require('../controllers/questionController');
 
 const {
@@ -28,6 +28,11 @@ const {
 	EditAnswer,
 	GetAnswer,
 } = require('../controllers/answerController');
+
+const {
+	CreateAttempt,
+	MakeAnswer,
+} = require('../controllers/attemptController');
 
 router.post('/classroom/add', verifyToken, AddClassroom);
 router.post('/classroom/edit', verifyToken, EditClassroom);
@@ -37,11 +42,12 @@ router.post('/quiz/add', verifyToken, AddQuiz);
 router.post('/quiz/edit', verifyToken, EditQuiz);
 router.get('/quiz/', verifyToken, GetQuiz);
 router.get('/quiz/all', verifyToken, GetAllQuiz);
+router.post('/quiz/start', verifyToken, CreateAttempt);
+router.post('/quiz/answer', verifyToken, MakeAnswer);
 
 router.post('/qst/add', verifyToken, AddQuestion);
 router.post('/qst/edit', verifyToken, EditQuestion);
 router.get('/qst/', verifyToken, GetQuestion);
-router.get('/qst/all', verifyToken, GetAllQuizQuestions);
 
 router.post('/ans/add', verifyToken, AddAnswer);
 router.post('/ans/edit', verifyToken, EditAnswer);

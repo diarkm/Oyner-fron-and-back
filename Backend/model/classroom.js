@@ -7,7 +7,7 @@ const ClassroomSchema = new mongoose.Schema(
 		description: { type: String, required: true },
 		owner: { type: mongoose.Types.ObjectId, ref: 'User' },
 	},
-	{ collection: 'classrooms' }
+	{ collection: 'classrooms', timestamps: true }
 );
 
 ClassroomSchema.plugin(mongoosePaginate);

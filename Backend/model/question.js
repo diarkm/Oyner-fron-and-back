@@ -6,7 +6,7 @@ const QuestionSchema = new mongoose.Schema(
 		quiz: { type: mongoose.Types.ObjectId, ref: 'Quiz', required: true },
 		answers: [{ type: mongoose.Types.ObjectId, ref: 'Answer' }],
 	},
-	{ collection: 'questions' }
+	{ collection: 'questions', timestamps: true }
 );
 
 const model = mongoose.model('Question', QuestionSchema);

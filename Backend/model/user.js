@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema(
 		password: { type: String, required: true, select: false },
 		classroom: { type: mongoose.Types.ObjectId, ref: 'Classroom' },
 	},
-	{ collection: 'users' }
+	{ collection: 'users', timestamps: true }
 );
 
 UserSchema.plugin(mongoosePaginate);

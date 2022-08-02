@@ -82,7 +82,12 @@ const GetQuiz = async (req, res) => {
 			}
 		});
 
-		const response = await Quiz.findOne({ _id: quizId });
+		const response = await Quiz.findOne({ _id: quizId })
+			.lean()
+			.populate({
+				path: 'questions',
+				populate: { path: 'answers' },
+			});
 
 		if (!response)
 			return res.json({ status: 'error', error: 'Cannot find this quiz' });
@@ -128,4 +133,29 @@ const GetAllQuiz = async (req, res) => {
 	}
 };
 
-module.exports = { AddQuiz, EditQuiz, GetQuiz, GetAllQuiz };
+const StartQuiz = async (req, res) => {
+	const { quizId } = req.body;
+	const token = req.token;
+	try {
+		jwt.verify(token, JWT_SECRET, function (err, decoded) {
+			if (err) {
+				return res.status(500).send({
+					message: err.message,
+				});
+			}
+		});
+
+		const quiz = await Quiz.findOne({ _id: quizId });
+
+		const response = quiz.createQuiz();
+
+		console.log(response);
+	} catch (error) {
+		res.json({
+			status: 'error',
+			error: 'You do not have permission to do this.',
+		});
+	}
+};
+
+module.exports = { AddQuiz, EditQuiz, GetQuiz, GetAllQuiz, StartQuiz };

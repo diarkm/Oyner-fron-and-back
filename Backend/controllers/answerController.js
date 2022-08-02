@@ -5,7 +5,7 @@ const Answer = require('../model/answer');
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const AddAnswer = async (req, res) => {
-	const { quesId, text, isCorrect } = req.body;
+	const { quesId, ans } = req.body;
 	const token = req.token;
 	try {
 		jwt.verify(token, JWT_SECRET, function (err, decoded) {
@@ -16,15 +16,13 @@ const AddAnswer = async (req, res) => {
 			}
 		});
 
-		const answer = await Answer.create({
-			text,
-			isCorrect,
-		});
+		const answers = await Answer.insertMany(JSON.parse(ans));
 
-		await Question.updateOne({ _id: quesId }, { $push: { answers: answer } });
+		await Question.updateOne({ _id: quesId }, { $push: { answers } });
 
 		res.json({ status: 'ok' });
 	} catch (error) {
+		console.log(error);
 		res.json({
 			status: 'error',
 			error: 'Something went wrong',

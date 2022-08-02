@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const Answer = require('../model/answer');
+const Quiz = require('../model/quiz');
 const Question = require('../model/question');
 
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -28,6 +28,8 @@ const AddQuestion = async (req, res) => {
 			text,
 			quiz,
 		});
+
+		await Quiz.updateOne({ _id: quizId }, { $push: { questions: question } });
 
 		res.json({ status: 'ok', data: question });
 	} catch (error) {
@@ -78,7 +80,9 @@ const GetQuestion = async (req, res) => {
 			}
 		});
 
-		const question = await Question.findOne({ _id: quesId });
+		const question = await Question.findOne({ _id: quesId })
+			.select('-quiz')
+			.lean();
 
 		if (!question)
 			return res.json({ status: 'error', error: 'Cannot find this question' });
@@ -92,32 +96,8 @@ const GetQuestion = async (req, res) => {
 	}
 };
 
-const GetAllQuizQuestions = async (req, res) => {
-	const { quizId } = req.body;
-	const token = req.token;
-	try {
-		jwt.verify(token, JWT_SECRET, function (err, decoded) {
-			if (err) {
-				return res.status(500).send({
-					message: err.message,
-				});
-			}
-		});
-
-		const questions = await Question.find({ quiz: quizId });
-
-		res.json({ status: 'ok', data: questions });
-	} catch (error) {
-		res.json({
-			status: 'error',
-			error: 'You do not have permission to do this.',
-		});
-	}
-};
-
 module.exports = {
 	AddQuestion,
 	EditQuestion,
 	GetQuestion,
-	GetAllQuizQuestions,
 };

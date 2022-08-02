@@ -6,8 +6,9 @@ const QuizSchema = new mongoose.Schema(
 		name: { type: String, required: true },
 		description: { type: String, required: true },
 		classroom: { type: mongoose.Types.ObjectId, ref: 'Classroom' },
+		questions: [{ type: mongoose.Types.ObjectId, ref: 'Question' }],
 	},
-	{ collection: 'quizes' }
+	{ collection: 'quizes', timestamps: true }
 );
 
 QuizSchema.plugin(mongoosePaginate);
