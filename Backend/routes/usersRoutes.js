@@ -11,7 +11,7 @@ const {
 
 router.get('/', verifyToken, GetUser);
 
-router.get('/student/all', verifyToken, GetAllStudents);
+router.get('/student/all/:page', verifyToken, GetAllStudents);
 router.get('/student/', verifyToken, GetStudent);
 
 module.exports = router;

@@ -59,7 +59,7 @@ const EditAnswer = async (req, res) => {
 };
 
 const GetAnswer = async (req, res) => {
-	const { ansId } = req.body;
+	const { ansId } = req.params;
 	const token = req.token;
 	try {
 		jwt.verify(token, JWT_SECRET, function (err, decoded) {

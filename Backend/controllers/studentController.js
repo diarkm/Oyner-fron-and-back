@@ -131,7 +131,7 @@ const StudentRegister = async (req, res) => {
 };
 
 const GetAllStudents = async (req, res) => {
-	const { page } = req.body;
+	const { page } = req.params || 1;
 	const token = req.token;
 	try {
 		jwt.verify(token, JWT_SECRET, function (err, decoded) {

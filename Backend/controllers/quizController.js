@@ -71,9 +71,10 @@ const EditQuiz = async (req, res) => {
 };
 
 const GetQuiz = async (req, res) => {
-	const { quizId } = req.body;
+	const { quizId } = req.params;
 	const token = req.token;
 	try {
+		console.log(quizId);
 		jwt.verify(token, JWT_SECRET, function (err, decoded) {
 			if (err) {
 				return res.status(500).send({
@@ -102,7 +103,7 @@ const GetQuiz = async (req, res) => {
 };
 
 const GetAllQuiz = async (req, res) => {
-	const { page } = req.body;
+	const { page } = req.params || 1;
 	const token = req.token;
 	try {
 		var _id;

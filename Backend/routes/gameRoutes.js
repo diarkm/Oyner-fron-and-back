@@ -40,17 +40,17 @@ router.get('/classroom', verifyToken, GetClassroom);
 
 router.post('/quiz/add', verifyToken, AddQuiz);
 router.post('/quiz/edit', verifyToken, EditQuiz);
-router.get('/quiz/', verifyToken, GetQuiz);
-router.get('/quiz/all', verifyToken, GetAllQuiz);
+router.get('/quiz/:quizId', verifyToken, GetQuiz);
+router.get('/quiz/all/:page', verifyToken, GetAllQuiz);
 router.post('/quiz/start', verifyToken, CreateAttempt);
 router.post('/quiz/answer', verifyToken, MakeAnswer);
 
 router.post('/qst/add', verifyToken, AddQuestion);
 router.post('/qst/edit', verifyToken, EditQuestion);
-router.get('/qst/', verifyToken, GetQuestion);
+router.get('/qst/:quesId', verifyToken, GetQuestion);
 
 router.post('/ans/add', verifyToken, AddAnswer);
 router.post('/ans/edit', verifyToken, EditAnswer);
-router.get('/ans/', verifyToken, GetAnswer);
+router.get('/ans/:ansId', verifyToken, GetAnswer);
 
 module.exports = router;
